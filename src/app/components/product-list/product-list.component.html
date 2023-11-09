@@ -1,0 +1,76 @@
+<div class="container">
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+      <td class="sidBarPersonal">
+        <app-side-bar></app-side-bar>
+      </td>
+      <td>
+        <table>
+          <tr>
+            <div class="container marketing" >
+              <div class="row categories" style="text-align: center; justify-content: center">
+                <div *ngFor="let subCategory of subCategories" >
+
+                  <div class="categories light col-lg-12">
+
+                    <h6 class="align-content-center">{{subCategory.name | titlecase}}</h6>
+                    <!--        <p>{{category.description | titlecase}}</p>-->
+                    <p><a class="btn btn-light"  (click)="getAllProductBySubCategoryId(subCategory.id)">Details »</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </tr>
+          <tr>
+            <div class="card-group">
+              <div *ngFor="let product of products">
+                <div class="card product-list">
+                  <div [routerLink]="['../../','p', product.id]">
+                    <img class="card-img-top" src="assets/cart4.svg" alt="">
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{product.name | titlecase}}</h5>
+                    <p class="card-text">{{product.description}}</p>
+                    <p class="card-text">{{product.priceDTO.newPrice | currency:'EUR'}}</p>
+                    <a class="btn btn-danger" (click)="addToCart(product.id)" data-toggle="modal" data-target="#exampleModal">Ajouter au panier</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </tr>
+        </table>
+
+      </td>
+
+    </tr>
+    </tbody>
+    <tfoot>
+
+    </tfoot>
+  </table>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Merci !</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Votre produit a bien été ajouté au panier
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger">Accéder au panier</button>
+      </div>
+    </div>
+  </div>
+</div>
